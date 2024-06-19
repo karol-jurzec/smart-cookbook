@@ -1,0 +1,141 @@
+@import '/node_modules/slick-carousel/slick/slick.css';
+@import '/node_modules/slick-carousel/slick/slick-theme.css';
+
+body {
+  background: linear-gradient(0deg, rgba(34,193,195,1) 0%, rgba(253,187,45,1) 100%);
+  margin: 0;
+  overflow: hidden;
+}
+
+.element {
+  height: 100vh;
+  display: flex;
+  justify-content: center;
+  flex-direction: column;
+}
+
+.container-custom {
+  background-color: transparent;
+  padding: 20px;
+  justify-content: center;
+  position: relative;
+  max-width: 800px;
+  margin: 0 auto;
+}
+
+.text-section {
+  margin-bottom: 20px;
+  padding: 20px;
+  background-color: transparent;
+  border-radius: 10px;
+  width: 100%;
+  align-self: center;
+}
+
+.cursor-pointer {
+  cursor: pointer;
+}
+
+.slick-slide > div {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+
+
+/* Custom button styles */
+.btn-custom {
+  background-color: #007bff;
+  border: none;
+  color: white;
+  font-size: 1.5rem;
+  padding: 1rem 2rem;
+  border-radius: 0.5rem;
+  transition: background-color 0.3s ease;
+  display: block;
+  width: 100%;
+  margin: 0.5rem 0;
+}
+
+.btn-custom:hover {
+  background-color:#0056b3 
+}
+
+.card-title {
+  font-size: 1.5rem;
+  font-weight: bold;
+  color: #6f42c1;
+  text-align: center;
+}
+
+.slick-next:before {
+  font-size: 4rem;
+  color: #6f42c1;
+}
+
+.slick-prev:before {
+  font-size: 4rem;
+  color: #6f42c1;
+  margin-left: -40px;
+}
+
+.border-selected {
+  border: 5px solid #6f42c1 !important;
+}
+
+.navigation-buttons {
+  display: flex;
+  justify-content: center;
+  gap: 10px;
+  margin-top: 20px;
+}
+
+.recipe-box {
+  border: 1px solid #ddd;
+  padding: 20px;
+  margin-bottom: 20px;
+  border-radius: 8px;
+  background-color: #f9f9f9;
+  position: relative;
+  z-index: 1;
+}
+
+.navigation-buttons-fixed {
+  display: flex;
+  justify-content: space-between;
+  position: fixed;
+  bottom: 20px;
+  width: 100%;
+  padding: 0 20px;
+  background-color: #fff;
+  border-top: 1px solid #ddd;
+  z-index: 2;
+}
+
+.navigation-buttons-fixed .btn-link {
+  cursor: pointer;
+  text-decoration: underline;
+}
+
+.form-control {
+  width: 100%;
+}
+
+button.mt-2 {
+  margin-top: 10px;
+}
+
+.recipe-card {
+  margin-top: 20px;
+}
+
+.recipe-tile {
+  cursor: pointer;
+  margin-bottom: 20px;
+}
+
+.recipe-tile:hover {
+  box-shadow: 0px 0px 15px rgba(0, 0, 0, 0.1);
+  transition: box-shadow 0.3s ease;
+}
