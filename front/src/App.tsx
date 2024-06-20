@@ -5,12 +5,14 @@ import Page2 from './components/Page2';
 import Page3 from './components/Page3';
 import Page4 from './components/Page4';
 import Page5 from './components/Page5';
+import LoadingButton from './components/LoadingButton';
 import './index.css';
 
 const App: React.FC = () => {
   const [formData, setFormData] = useState<any>({});
   const [recipes, setRecipes] = useState<Recipe[]>([]);
   const [selectedRecipe, setSelectedRecipe] = useState<Recipe | null>(null);
+  const [isLoading, setIsLoading] = useState<boolean>(false);
 
   useEffect(() => {
     const isStateCleared = localStorage.getItem('isStateCleared');
@@ -69,8 +71,10 @@ const App: React.FC = () => {
   };
 
   const handleSubmit = async () => {
+    console.log("Handle submit")
     const transformedData = transformFormData(formData);
     console.log(JSON.stringify(transformedData));
+    setIsLoading(true);
     try {
       const response = await fetch('http://localhost:4000/api/recipes/generate', {
         method: 'POST',
@@ -89,10 +93,13 @@ const App: React.FC = () => {
       }
     } catch (error) {
       console.error('Error while generating recipes:', error);
+    } finally {
+      setIsLoading(false);
     }
   };
 
   const handleGenerateAgain = () => {
+    console.log("Gen again")
     const recipeNames = recipes.map(recipe => recipe.name).join(', ');
     setFormData(prevData => ({
       ...prevData,
@@ -101,7 +108,7 @@ const App: React.FC = () => {
         custom: `${prevData.page4.custom || ''} + Don't create the same recipes as: ${recipeNames}`,
       },
     }));
-    handleSubmit();
+    // handleSubmit();
   };
 
 
@@ -149,6 +156,7 @@ const App: React.FC = () => {
       instructions: updateInfo || '',
     };
 
+    setIsLoading(true);
     try {
       const response = await fetch('http://localhost:4000/api/recipes/update', {
         method: 'POST',
@@ -184,6 +192,8 @@ const App: React.FC = () => {
       }
     } catch (error) {
       console.error('Error while updating recipe:', error);
+    } finally {
+      setIsLoading(false);
     }
   };
 
@@ -207,7 +217,7 @@ const App: React.FC = () => {
         <Page3 onTileSelect={(tiles) => handleTileSelect('page3', tiles)} />
       </Element>
       <Element name="page4" className="element">
-        <Page4 onSubmit={handleFormSubmit} />
+        <Page4 onSubmit={handleFormSubmit}/>
       </Element>
       <Element name="page5" className="element">
         <Page5
@@ -217,6 +227,7 @@ const App: React.FC = () => {
           onUpdateRecipe={handleUpdateRecipe}
           selectedRecipe={selectedRecipe}
           setSelectedRecipe={setSelectedRecipe}
+          isLoading={isLoading}
         />
       </Element>
       <div className="navigation-buttons">

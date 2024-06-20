@@ -24,10 +24,15 @@ const Page1: React.FC<{ onTileSelect: (tiles: any) => void }> = ({ onTileSelect 
 
   return (
     <div style={{ display: 'flex', flexDirection: 'column', height: '80vh' }}>
-      <div className="title-container" style={{ display: 'flex', justifyContent: 'center', alignItems: 'center', flex: '1', textAlign: 'center' }}>
-        <h2 style={{ color: 'white', fontSize: '60px', textShadow: '2px 2px 4px rgba(0, 0, 0, 0.5)' }}>Do you want something to eat? </h2>
+      <div className="title-container" style={{ display: 'flex', justifyContent: 'center', alignItems: 'center', flex: '1', textAlign: 'center', marginBottom: '75px' }}>
+      <h2 style={{ color: 'white', fontSize: '40px', textShadow: '2px 2px 4px rgba(0, 0, 0, 0.5)' }}>
+        Hi! <span role="img" aria-label="waving hand">👋</span><br/>
+        Do you want something to eat? <span role="img" aria-label="burger">🍔</span> 
+      </h2>
+
+
       </div>
-      <TileSelector text="Select your dish type:" tiles={tiles} onTileSelect={onTileSelect} />
+      <TileSelector text="Select your meal:" tiles={tiles} onTileSelect={onTileSelect} />
       <div className="navigation-buttons" style={{ display: 'flex', justifyContent: 'center', padding: '20px' }}>
         <button onClick={scrollToNext} className="btn btn-custom">Next</button>
       </div>

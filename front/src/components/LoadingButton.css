@@ -1,0 +1,24 @@
+.loading-button {
+    position: relative;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 1rem 2rem;
+    font-size: inherit; /* Ensure font size is inherited from the button style */
+  }
+  
+  .spinner {
+    border: 4px solid #f3f3f3; /* Increased border width */
+    border-top: 4px solid #3498db; /* Increased border width */
+    border-radius: 50%;
+    width: 1.5em; /* Use em units to size relative to the font size */
+    height: 1.5em; /* Use em units to size relative to the font size */
+    animation: spin 1s linear infinite;
+    margin-left: 0.5em; /* Add margin to the left of the spinner */
+  }
+  
+  @keyframes spin {
+    0% { transform: rotate(0deg); }
+    100% { transform: rotate(360deg); }
+  }
+  

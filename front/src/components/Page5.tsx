@@ -1,18 +1,19 @@
 import React, { useState } from 'react';
 import { Container, Row, Col, Button, Card } from 'react-bootstrap';
 import Slider from 'react-slick';
-import { Recipe } from './types';
+import LoadingButton from './LoadingButton';
 
 interface Page5Props {
   recipes: Recipe[];
   onGenerateAgain: () => void;
   onExportPDF: () => void;
-  onUpdateRecipe: (recipeId: number, updatedIngredients: string) => void;
+  onUpdateRecipe: (recipe: Recipe, updatedIngredients: string) => void;
   selectedRecipe: Recipe | null;
-  setSelectedRecipe: (recipe: Recipe | null) => void; // Add setSelectedRecipe
+  setSelectedRecipe: (recipe: Recipe | null) => void;
+  isLoading: boolean;
 }
 
-const Page5: React.FC<Page5Props> = ({ recipes, onGenerateAgain, onExportPDF, onUpdateRecipe,  selectedRecipe, setSelectedRecipe }) => {
+const Page5: React.FC<Page5Props> = ({ recipes, onGenerateAgain, onExportPDF, onUpdateRecipe, selectedRecipe, setSelectedRecipe, isLoading }) => {
   const [updatedIngredients, setUpdatedIngredients] = useState('');
 
   const handleRecipeSelect = (recipe: Recipe) => {
@@ -22,7 +23,6 @@ const Page5: React.FC<Page5Props> = ({ recipes, onGenerateAgain, onExportPDF, on
   const handleBackToList = () => {
     setSelectedRecipe(null);
   };
-
 
   const settings = {
     dots: false,
@@ -40,7 +40,9 @@ const Page5: React.FC<Page5Props> = ({ recipes, onGenerateAgain, onExportPDF, on
           <Col>
             <h2 className="my-4">Recipes found:</h2>
             <p>No recipes available. Please generate recipes.</p>
-            <Button onClick={onGenerateAgain} size="lg" className="d-block mx-auto">Generate Again</Button>
+            <LoadingButton onClick={onGenerateAgain} isLoading={isLoading} className="d-block mx-auto btn-custom">
+              Generate Again
+            </LoadingButton>
           </Col>
         </Row>
       </Container>
@@ -81,9 +83,9 @@ const Page5: React.FC<Page5Props> = ({ recipes, onGenerateAgain, onExportPDF, on
           </Row>
           <Row className="mt-3">
             <Col className="d-flex justify-content-center">
-              <Button variant="primary" size="lg" onClick={onGenerateAgain}>
+              <LoadingButton onClick={onGenerateAgain} isLoading={isLoading} className="btn-custom">
                 Generate Again
-              </Button>
+              </LoadingButton>
             </Col>
           </Row>
         </>
@@ -103,13 +105,13 @@ const Page5: React.FC<Page5Props> = ({ recipes, onGenerateAgain, onExportPDF, on
                   <Card.Text>
                     <strong>Ingredients:</strong>
                     <ul>
-                      {selectedRecipe.ingredients.map((ingredient, index) => (
+                      {selectedRecipe.ingredients.map((ingredient: string, index: number) => (
                         <li key={index}>{ingredient}</li>
                       ))}
                     </ul>
                     <strong>Instructions:</strong>
                     <ol>
-                      {selectedRecipe.instructions.map((instruction, index) => (
+                      {selectedRecipe.instructions.map((instruction: string, index: number) => (
                         <li key={index}>{instruction.replace(/^\d+\.\s*/, '')}</li>
                       ))}
                     </ol>
@@ -135,15 +137,13 @@ const Page5: React.FC<Page5Props> = ({ recipes, onGenerateAgain, onExportPDF, on
                 placeholder="Give feedback..."
                 className="form-control mb-2"
               />
-              <Button
-                variant="primary"
+              <LoadingButton
                 onClick={() => onUpdateRecipe(selectedRecipe, updatedIngredients)}
-                className="mt-3 mb-3"
-                size="lg"
-                style={{ marginTop: '10px', marginBottom: '20px' }}
+                isLoading={isLoading}
+                className="mt-3 mb-3 btn-custom"
               >
                 Update Recipe
-              </Button>
+              </LoadingButton>
             </Col>
           </Row>
         </>

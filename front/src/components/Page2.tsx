@@ -38,7 +38,7 @@ const Page2: React.FC<{ onTileSelect: (tiles: any) => void }> = ({ onTileSelect 
 
   return (
     <div>
-      <TileSelector text="Select your kitchen type:" tiles={tiles} onTileSelect={onTileSelect} />
+      <TileSelector text="Select your favourite cuisine:" tiles={tiles} onTileSelect={onTileSelect} />
       <div className="navigation-buttons">
         <button onClick={scrollToPrevious} className="btn btn-custom">Back</button>
         <button onClick={scrollToNext} className="btn btn-custom">Next</button>

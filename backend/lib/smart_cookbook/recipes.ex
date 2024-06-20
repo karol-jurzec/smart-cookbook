@@ -27,7 +27,7 @@ defmodule SmartCookbook.Recipes do
 
   defp gen_recipes_with_ai(%GenRecipeRequest{} = request) do
     ~l"""
-    model: #{@dumb_model}
+    model: #{@smart_model}
 
     system: You are an expert at creating recipes. Based on provided preferences create recipe(s) matching all requirements.
             Be precise and follow the example to match the response format.
@@ -147,6 +147,7 @@ defmodule SmartCookbook.Recipes do
   defp add_calories(msg, calories) do
     case calories do
       nil -> msg
+      0 -> msg
       calories -> "#{msg} The meal should have around #{calories} kcal"
     end
   end

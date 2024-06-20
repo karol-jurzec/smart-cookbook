@@ -39,7 +39,7 @@ const TileSelector: React.FC<TileSelectorProps> = ({ text, tiles, onTileSelect }
       <Row className="mb-4">
         <Col>
           <div className="p-3"> 
-            <h2 style={{ color: 'white', fontSize: '50px', textShadow: '2px 2px 4px rgba(0, 0, 0, 0.5)' }}>{text}</h2>
+            <h2 style={{ color: 'white', fontSize: '30px', textShadow: '2px 2px 4px rgba(0, 0, 0, 0.5)' }}>{text}</h2>
           </div>
         </Col>
       </Row>

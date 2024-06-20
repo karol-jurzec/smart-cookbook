@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import { Container, Row, Col, Form } from 'react-bootstrap';
 import { scroller } from 'react-scroll';
+import LoadingButton from './LoadingButton'; // Import LoadingButton
 
 const Page4: React.FC<{ onSubmit: (data: any) => void }> = ({ onSubmit }) => {
   const [calories, setCalories] = useState('');
@@ -8,9 +9,11 @@ const Page4: React.FC<{ onSubmit: (data: any) => void }> = ({ onSubmit }) => {
   const [allergies, setAllergies] = useState('');
   const [numberOfRecipes, setNumberOfRecipes] = useState('');
   const [custom, setCustom] = useState('');
+  const [isLoading, setIsLoading] = useState(false);
 
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
+    setIsLoading(true);
     const data = {
       calories: parseInt(calories, 10) || 0,
       preparationTime,
@@ -34,7 +37,7 @@ const Page4: React.FC<{ onSubmit: (data: any) => void }> = ({ onSubmit }) => {
     <Container className="container-custom">
       <Row className="text-section">
         <Col>
-          <h2 style={{color:'white'}}>Enter your more detailed dietary preferences:</h2>
+        <h2 style={{color:'white'}}>Enter your more detailed dietary preferences:</h2>
         </Col>
       </Row>
       <Form onSubmit={handleSubmit} style={{color: 'white', fontSize: '20px'}}>
@@ -93,7 +96,7 @@ const Page4: React.FC<{ onSubmit: (data: any) => void }> = ({ onSubmit }) => {
         <Row className="mb-3">
           <Col>
             <Form.Group controlId="custom">
-              <Form.Label>Custom:</Form.Label>
+              <Form.Label>Custom requirements:</Form.Label>
               <Form.Control
                 type="text"
                 value={custom}
@@ -112,9 +115,9 @@ const Page4: React.FC<{ onSubmit: (data: any) => void }> = ({ onSubmit }) => {
         </Row>
         <Row className="navigation-buttons">
           <Col>
-            <button type="submit" className="btn-custom">
+            <LoadingButton type="submit" isLoading={isLoading} className="btn-custom">
               Submit
-            </button>
+            </LoadingButton>
           </Col>
         </Row>
       </Form>
@@ -123,4 +126,3 @@ const Page4: React.FC<{ onSubmit: (data: any) => void }> = ({ onSubmit }) => {
 };
 
 export default Page4;
-
